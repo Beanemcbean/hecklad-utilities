@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    var wrapper = $(".agents");
+    var add_button = $(".add_agent");
+    var agent_form = '<div>\
+    <label for="lvl">lvl:</label>\
+    <input type="number" name="lvl[]"/>\
+    <label for="clearance">Clearance:</label>\
+    <input type="number" name="clearance[]"/>\
+    <a href="#" class="delete">Delete</a>\
+</div>'
+
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        $(wrapper).append(agent_form);
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+    })
+});
+
+function calculate() {
+    var requisition = 10
+    var team_size = document.getElementById("agents").childElementCount - 1;
+    var clearance =
+    var avg_lvl
+    var threat
+    var good_books
+    
+    requisition += (team_size < 5) ? team_size * 2 : 10
+    requisition += (clearance - 1) * 2
+    requisition += round_down(avg_lvl / 2)
+    requisition += threat
+    requisition += good_books ? 1 : 0
+    document.getElementById("GFG").innerHTML
+                = "Requisition points: "
+                + requisition;
+}
+</script>
+</head>
+<body>
+    <label for="clearance">Clearance:</label>
+    <input type="number" id="clearance" name="clearance">
+    <label for="threat">Threat:</label>
+    <input type="number" id="threat" name="threat">
+    <label for="good_books">Good books:</label>
+    <input type="checkbox" id="good_books" name="good_books"><br><br>
+
+    <div class="agents"/>        
+        <button class="add_agent">Add New Agent &nbsp; 
+            <span style="font-size:16px; font-weight:bold;">+ </span>
+        </button>
+    </div>
+
+    <button type="button" id="calculate" onclick="calculate">Calculate</button>
+    <h5 id="GFG"></h5>
+</body>
+</html>
+
